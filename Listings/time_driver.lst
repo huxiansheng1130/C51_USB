@@ -1,0 +1,53 @@
+C51 COMPILER V9.60.0.0   TIME_DRIVER                                                       02/11/2025 16:13:09 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE TIME_DRIVER
+OBJECT MODULE PLACED IN .\Objects\time_driver.obj
+COMPILER INVOKED BY: E:\1.software\60.Keil_C51\C51\BIN\C51.EXE app\time_driver.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEX
+                    -TEND PRINT(.\Listings\time_driver.lst) TABS(2) OBJECT(.\Objects\time_driver.obj)
+
+line level    source
+
+   1          #include "app/time_driver.h"
+   2          #include "app/led_driver.h"
+   3          #include "user/my_types.h"
+   4          #include "app/key_driver.h"
+   5          #include "user/user_config.h"
+   6          
+   7          uint32 count = 0;
+   8          
+   9          void tick0_reload(void)
+  10          {
+  11   1        TL0 = T1MS;
+  12   1        TH0 = T1MS >> 8;
+  13   1      }
+  14          
+  15          void tick0_init(void)
+  16          {
+  17   1        TMOD |= 0x01;    // 定时器0，16位全用
+  18   1        TR0 = 0x01;
+  19   1        ET0 = 0x01;
+  20   1        EA = 0x01;
+  21   1        tick0_reload();
+  22   1      }
+  23          
+  24          void tick0_irq() interrupt 1 using 1
+  25          {
+  26   1        tick0_reload();
+  27   1        
+  28   1        key_scan();
+  29   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     49    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,80 @@
+C51 COMPILER V9.60.0.0   UART_DRIVER                                                       02/11/2025 16:13:09 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE UART_DRIVER
+OBJECT MODULE PLACED IN .\Objects\uart_driver.obj
+COMPILER INVOKED BY: E:\1.software\60.Keil_C51\C51\BIN\C51.EXE app\uart_driver.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEX
+                    -TEND PRINT(.\Listings\uart_driver.lst) TABS(2) OBJECT(.\Objects\uart_driver.obj)
+
+line level    source
+
+   1          #include "app/uart_driver.h"
+   2          #include "user/user_config.h"
+   3          #include "user/my_types.h"
+   4          
+   5          volatile uint8 sending;
+   6          
+   7          void uart_init(void)
+   8          {
+   9   1        // set time1 init
+  10   1        TMOD |= 0x20;
+  11   1        TH1 = TL1 = 256 - FOSC / (BIT_RATE * 12 * 16);
+  12   1        TR1 = 1;
+  13   1        
+  14   1        // set serial communication mode1
+  15   1        SCON = 0x50; 
+  16   1        
+  17   1        // set serial power baud rate 
+  18   1        PCON |= 0x80;
+  19   1        
+  20   1        // allow serial capture
+  21   1        REN = 1;
+  22   1        
+  23   1        // enable serial Interrupt 
+  24   1        ES = 1;
+  25   1        
+  26   1        // enable all Interrupt 
+  27   1        EA = 1;
+  28   1      }
+  29          
+  30          void uart_iqr(void) interrupt 4 
+  31          {
+  32   1          if(RI)
+  33   1          {
+  34   2              RI = 0;
+  35   2          }
+  36   1          else 
+  37   1          {
+  38   2              TI = 0;
+  39   2              sending = 0;
+  40   2          }
+  41   1      }
+  42          
+  43          void uart_send_byte(uint8 buf)
+  44          {
+  45   1          SBUF = buf;
+  46   1          sending = 1;
+  47   1          while (sending);
+  48   1      }
+  49          
+  50          void uart_send_str(uint8 *str)
+  51          {
+  52   1          while (*str)
+  53   1              uart_send_byte(*str++);
+  54   1      }
+C51 COMPILER V9.60.0.0   UART_DRIVER                                                       02/11/2025 16:13:09 PAGE 2   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     83    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

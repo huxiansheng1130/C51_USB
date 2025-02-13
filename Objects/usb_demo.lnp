@@ -1,0 +1,8 @@
+".\Objects\main.obj",
+".\Objects\led_driver.obj",
+".\Objects\time_driver.obj",
+".\Objects\key_driver.obj",
+".\Objects\uart_driver.obj",
+".\Objects\math.obj" 
+TO ".\Objects\usb_demo" 
+PRINT(".\Listings\usb_demo.m51") RAMSIZE(256) 
