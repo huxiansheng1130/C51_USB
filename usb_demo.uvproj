@@ -406,6 +406,11 @@
               <FileType>1</FileType>
               <FilePath>.\app\uart_driver.c</FilePath>
             </File>
+            <File>
+              <FileName>pdiusb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\pdiusb.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
