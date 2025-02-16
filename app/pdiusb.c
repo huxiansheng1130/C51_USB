@@ -10,6 +10,16 @@ void d12_write_command(uint8 command)
 	d12_set_port_in();
 }
 
+void d12_write_byte(uint8 value)
+{
+	d12_set_data_addr();
+    d12_clr_wr();
+    d12_set_port_out();
+    d12_set_data(value);
+    d12_set_wr();
+    d12_set_port_in();
+}
+
 uint8 d12_read_byte(void)
 {
 	uint8 temp;

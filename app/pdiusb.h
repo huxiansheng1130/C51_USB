@@ -25,5 +25,9 @@
 #define d12_set_port_in()				D12_DATA = 0xFF
 #define d12_set_port_out()
 
+extern void d12_write_command(uint8 command);
+extern void d12_write_byte(uint8 value);
 extern uint16 d12_read_id(void);
+extern uint8 d12_read_byte(void);
+
 #endif 

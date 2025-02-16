@@ -6,6 +6,7 @@
 
 #define BIT_RATE 9600UL
 
+extern void print_int(int num);
 extern void uart_init(void);
 extern void u_printf(const char *format, ...);
 

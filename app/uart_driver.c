@@ -83,11 +83,12 @@ void u_printf(const char *format, ...)
         format++;
         switch (*format) {
             case 'd':
-            case 'i':
                 print_int(va_arg(args, int));
+            case 'i':
+                print_int(va_arg(args, unsigned char));
                 break;
             case 'x':
-                print_hex(va_arg(args, unsigned int));
+                print_hex(va_arg(args, unsigned char));
                 break;
             case 's':
                 print_string(va_arg(args, const char*));

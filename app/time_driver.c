@@ -6,6 +6,13 @@
 
 uint32 count = 0;
 
+void WaitMs(uint16 value)
+{
+	uint16 i, j;
+	for(i = 0; i < value; i++) 
+		for (j = 0; j < 220; j++);
+}
+
 void tick0_reload(void)
 {
 	TL0 = T1MS;

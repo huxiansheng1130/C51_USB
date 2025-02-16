@@ -411,6 +411,11 @@
               <FileType>1</FileType>
               <FilePath>.\app\pdiusb.c</FilePath>
             </File>
+            <File>
+              <FileName>usb_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\usb_core.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
